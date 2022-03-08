@@ -10,12 +10,8 @@ dotenv.config();
 
 //env variables
 const PORT = process.env.PORT || 2000;
-// const username = process.env.MONGODB_USERNAME;
-// const password = process.env.MONGODB_PASSWORD;
-// const dbname = process.env.MONGODB_DATABASE;
 
 //db connection
-// connection(username, password, dbname);
 connection();
 
 //middlewares
