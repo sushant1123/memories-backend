@@ -18,13 +18,13 @@ export const createPost = async (req, res) => {
 		let obj = {
 			title: post.title,
 			message: post.message,
-			creator: post.creator,
 			tags: post.tags,
 			selectedFile: post.selectedFile,
 			likeCount: post.likeCount,
+			name: post.name,
 		};
 
-		const newPost = new PostMessage(obj);
+		const newPost = new PostMessage({ ...obj, creator: req.userId });
 		await newPost.save();
 		res.status(201).json(newPost);
 	} catch (error) {
