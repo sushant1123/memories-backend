@@ -20,6 +20,7 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/api", v1Routes);
+
 app.get("/", (req, res) => {
 	res.send("Hello to Memories API");
 });

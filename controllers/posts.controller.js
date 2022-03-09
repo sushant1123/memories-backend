@@ -10,7 +10,6 @@ export const getPost = async (req, res) => {
 
 		return res.status(200).json(post);
 	} catch (error) {
-		console.log("getPost::");
 		console.log(error);
 		res.status(404).json({ message: error.message });
 	}
@@ -53,7 +52,6 @@ export const getAllPostsBySearch = async (req, res) => {
 
 		return res.status(200).json({ data: posts });
 	} catch (error) {
-		console.log("getAllPostsBySearch::");
 		console.log(error);
 		res.status(404).json({ message: error.message });
 	}
