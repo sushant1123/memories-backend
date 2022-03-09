@@ -12,6 +12,23 @@ export const getAllPosts = async (req, res) => {
 	}
 };
 
+export const getAllPostsBySearch = async (req, res) => {
+	try {
+		const { searchQuery, tags } = req.query;
+
+		//convert it into regex and ignore the case
+		const title = new RegExp(searchQuery, "i");
+
+		//find me all the posts which has either matching title or tags
+		const posts = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(",") } }] });
+
+		res.status(200).json({ data: posts });
+	} catch (error) {
+		console.log(error);
+		res.status(404).json({ message: error.message });
+	}
+};
+
 export const createPost = async (req, res) => {
 	try {
 		const { post } = req.body;
