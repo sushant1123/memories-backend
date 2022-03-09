@@ -1,6 +1,21 @@
 import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
 
+export const getPost = async (req, res) => {
+	try {
+		console.log(req.params);
+		const { id } = req.params;
+
+		const post = await PostMessage.findById(id);
+
+		return res.status(200).json(post);
+	} catch (error) {
+		console.log("getPost::");
+		console.log(error);
+		res.status(404).json({ message: error.message });
+	}
+};
+
 export const getAllPosts = async (req, res) => {
 	try {
 		const { page } = req.query;
@@ -27,16 +42,18 @@ export const getAllPosts = async (req, res) => {
 
 export const getAllPostsBySearch = async (req, res) => {
 	try {
+		console.log(req.query);
 		const { searchQuery, tags } = req.query;
 
 		//convert it into regex and ignore the case
 		const title = new RegExp(searchQuery, "i");
 
-		//find me all the posts which has either matching title or tags
+		//find  all the posts which has either matching title or tags
 		const posts = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(",") } }] });
 
-		res.status(200).json({ data: posts });
+		return res.status(200).json({ data: posts });
 	} catch (error) {
+		console.log("getAllPostsBySearch::");
 		console.log(error);
 		res.status(404).json({ message: error.message });
 	}
