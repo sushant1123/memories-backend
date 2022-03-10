@@ -3,7 +3,6 @@ import PostMessage from "../models/postMessage.js";
 
 export const getPost = async (req, res) => {
 	try {
-		console.log(req.params);
 		const { id } = req.params;
 
 		const post = await PostMessage.findById(id);
@@ -41,7 +40,6 @@ export const getAllPosts = async (req, res) => {
 
 export const getAllPostsBySearch = async (req, res) => {
 	try {
-		console.log(req.query);
 		const { searchQuery, tags } = req.query;
 
 		//convert it into regex and ignore the case
